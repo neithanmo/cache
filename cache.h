@@ -13,8 +13,14 @@ class cache
     public:
         cache();
         ~cache();
+        friend class crap;
 
     private:
+        int **cache; //matriz para el cache, lecturas y escrituras
+        unsigned int dir;
+        int hits;
+        int miss;
+
 
 
 

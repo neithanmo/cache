@@ -1,4 +1,5 @@
 #include <iostream>
+#include "cache.h"
 
 using namespace std;
 
