@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
     sscanf(hola.c_str(), "%x", &num);
     std::cout<<num<<endl;
     unsigned int rot = num>>2;
-    cout<<rot;
+    cout<<rot;//
 
 }
 

@@ -51,6 +51,7 @@ void Cache::configure(){
         }
      cout<<"set seleccionado es: "<<Cache::obtener_set(this->dir, this->n_sets, this->offset)<<endl;
      cout<<"este es el tag: "<<Cache::obtener_tag(this->dir, this->indexMasoffset)<<endl;
+
 }
 
 
