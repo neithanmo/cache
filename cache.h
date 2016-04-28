@@ -55,12 +55,8 @@ class Cache
         void run_simulation(ifstream &file);//funcion lee lineas del archivo
                                             //hace conversion, verifica si tag esta o no en el cache
                                             //lleva estadisticas de hit y misses, y va graficando en
-                                            //en tiempo real.
 
-
-
-
-
+        //en tiempo real.
 
 };
 
