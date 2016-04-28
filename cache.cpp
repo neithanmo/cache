@@ -104,7 +104,7 @@ void Cache::run_simulation(){
     cout<<"numero toal de hits: "<<hits<<endl;
     cout<<"numero total de misses: "<<miss<<endl;
     cout<<"numero total de accesos a cache fue de: "<<accesos<<endl;
-     gnp << "set xrange [0:50001]\nset yrange [0:100000]\n";
+    gnp << "set xrange [0:50001]\nset yrange [0:100000]\n";
     gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'Hit-rate',"
             << gnp.file1d(xy_pts_B) << "with lines title 'Miss-rate',"
             << gnp.file1d(xy_pts_C) <<"with lines title 'hits/miss'" << std::endl;
