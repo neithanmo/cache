@@ -56,7 +56,7 @@ class Cache
                                             //hace conversion, verifica si tag esta o no en el cache
                                             //lleva estadisticas de hit y misses, y va graficando en
 
-        //en tiempo real.
+                                           //en tiempo real.
 
 };
 
