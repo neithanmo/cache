@@ -8,9 +8,6 @@ using namespace std;
 int main(int argc, char *argv[])
 {
     Cache *miCache = new Cache();
-    printf("argumentos son: %d\n", argc);
-    cout<<"primer argumento es: "<< argv[1]<<endl;
-    printf("x = %d\n",(int)(*argv[1]));
 
     if(argc==4)
     {
@@ -21,8 +18,7 @@ int main(int argc, char *argv[])
         sscanf(argv[3], "%d", &miCache->asoc);
         cout << "Tamaño del cache es: "<< miCache->t_cache << endl;
         cout << "Tamaño del bloque es: "<< miCache->t_bloque << endl;
-        cout << "tipo de asociatividad es" <<miCache->asoc<<endl;
-        cout << "son :"<< argc << endl;
+        cout << "tipo de asociatividad es: " <<miCache->asoc<<endl;
     }
     else
     {
@@ -31,13 +27,12 @@ int main(int argc, char *argv[])
     }
 
     miCache->configure();
-
-
-
-
-
-
-
+    unsigned int num = 0;
+    string hola ="8";
+    sscanf(hola.c_str(), "%x", &num);
+    std::cout<<num<<endl;
+    unsigned int rot = num>>2;
+    cout<<rot;
 
 }
 
