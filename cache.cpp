@@ -68,9 +68,10 @@ void Cache::run_simulation(){
     std::vector<std::pair<double, double> > xy_pts_A;
     std::vector<std::pair<double, double> > xy_pts_B;
     std::vector<std::pair<double, double> > xy_pts_C;
-
+    clock_t begin = clock();
     while(!fin.eof())
     {
+
         fin >> direccion >> SoL;
         sscanf(direccion.c_str(), "%x", &dir);//conversion de hex a decimal y se asigna a dir
                                               //con dir se obtiene el tag y el set dependiendo de
@@ -101,13 +102,18 @@ void Cache::run_simulation(){
 
 
     }
-    cout<<"numero toal de hits: "<<hits<<endl;
+    cout<<"numero total de hits: "<<hits<<endl;
     cout<<"numero total de misses: "<<miss<<endl;
     cout<<"numero total de accesos a cache fue de: "<<accesos<<endl;
-     gnp << "set xrange [0:50001]\nset yrange [0:100000]\n";
-    gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'Hit-rate',"
+    clock_t end = clock();
+    float timeSim = (end - begin)/CLOCKS_PER_SEC;
+    cout<<"el tiempo de simulación sin contar lo que toma gnuplot para graficar fue de: "<<timeSim<<" segundos"<<endl;
+
+     /*gnp << "set xrange [0:"<<accesos<<"]\nset yrange [0:"<<hits<<"]\n";
+     gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'Hit-rate',"
             << gnp.file1d(xy_pts_B) << "with lines title 'Miss-rate',"
-            << gnp.file1d(xy_pts_C) <<"with lines title 'hits/miss'" << std::endl;
+            << gnp.file1d(xy_pts_C) <<"with lines title 'hits/miss'" << std::endl;*/
+
     delete(cache);//limpiado de memoria
 
 }
