@@ -1,11 +1,13 @@
 Este es un programa para simulación de una memoria cache.
 Se deja al usuario ajustar la simulación modificando lo siguiente:
+
 	1. Tamaño de la cache
 	2. Tamaño del bloque
 	3. tipo de asociatividad:
-	  1. (1)mapeo directo
-          2. (2)2-way set-associative
-	  4. (4)4-way set-associative
+	  	* (1)mapeo directo
+          	* (2)2-way set-associative
+	  	* (4)4-way set-associative
+
 Luego de la simulación se imprime en pantalla el numero de hits y misses encontrados en la simulación
 luego se grafican los resultados.
 
