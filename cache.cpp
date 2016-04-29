@@ -39,19 +39,7 @@ void Cache::configure(){
         }
     }
 
-    //para mostrar la matriz
-  /* for (int i = 0; i < n_sets; i++)
-    {
-        for (int j = 0; j < asoc; j++)
-        {
-            cout << cache[i][j] << "\t"<<endl;
-        }
-
-     }*/
     //#################################################################################################
-
-
-
 }
 
 
@@ -65,51 +53,53 @@ void Cache::run_simulation(){
     ifstream fin;
     fin.open(filename.c_str(), ifstream::in);
     string direccion, SoL;
-    std::vector<std::pair<double, double> > xy_pts_A;
+    std::vector<std::pair<unsigned int, float> > xy_pts_A;
     std::vector<std::pair<double, double> > xy_pts_B;
     std::vector<std::pair<double, double> > xy_pts_C;
-
+    clock_t inicio = clock();
+    double hitrate;
+    float missrate;
     while(!fin.eof())
     {
         fin >> direccion >> SoL;
         sscanf(direccion.c_str(), "%x", &dir);//conversion de hex a decimal y se asigna a dir
                                               //con dir se obtiene el tag y el set dependiendo de
                                               //el offset, index calculados inicialmente
-
         this->select_set = obtener_set(this->dir, this->n_sets, this->offset);
         //cout<<"set seleccionado es: "<<select_set<<endl;
         this->tag = obtener_tag(this->dir, this->indexMasoffset);
-        //cout<<"este es el tag: "<<tag<<endl;
 
         //######################## Accesando al cache y comparando tags ##################################################
 
         for(int j =0; j<asoc;j++){
-            if(cache[select_set][j] == tag)
+            if(cache[select_set][j] == tag){
                 hits++; //el dato se encuentra en el cache - hay un hit, no se hace nada más
+                accesos++;
+            }
             else{
                 miss++; //no esta en el cache es un miss
                 int nuevo_set = rand()%n_sets;//la política de escritura en cache es aleatória
                 cache[nuevo_set][j] = tag;
+                accesos++;
             }
            }
-        accesos++;
-        float hitrate=hits/accesos;
-        float missrate=miss/accesos;
-        xy_pts_A.push_back(std::make_pair(accesos, hits));
-        xy_pts_B.push_back(std::make_pair(accesos, miss));
-        xy_pts_C.push_back(std::make_pair(miss, hits));
-
-
+        hitrate=((float)hits/accesos)*100;
+        missrate=((float)miss/accesos)*100;
+        xy_pts_A.push_back(std::make_pair(accesos,missrate));
+        xy_pts_B.push_back(std::make_pair(accesos, hitrate));
+        //xy_pts_C.push_back(std::make_pair(miss, hits));
     }
-    cout<<"numero toal de hits: "<<hits<<endl;
+    cout<<"numero total de hits: "<<hits<<endl;
     cout<<"numero total de misses: "<<miss<<endl;
     cout<<"numero total de accesos a cache fue de: "<<accesos<<endl;
-    gnp << "set xrange [0:50001]\nset yrange [0:100000]\n";
-    gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'Hit-rate',"
-            << gnp.file1d(xy_pts_B) << "with lines title 'Miss-rate',"
-            << gnp.file1d(xy_pts_C) <<"with lines title 'hits/miss'" << std::endl;
+    cout<<"MISSRATE "<<missrate<<endl;
+    clock_t final = clock();
+    double tiempo_sim = (final - inicio)/ CLOCKS_PER_SEC;
+    cout<<"el tiempo  de simulación sin contar lo que tome gnuplot para graficar fue de: "<<tiempo_sim<<" segundos"<<endl;
+    gnp << "set xrange [0:"<<accesos<<"]\nset yrange [0:100]\n";
+    gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'missrate',"
+            << gnp.file1d(xy_pts_B) << "with lines title 'hitrate'"<<std::endl;
     delete(cache);//limpiado de memoria
-
 }
 
 
