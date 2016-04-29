@@ -51,18 +51,18 @@ void Cache::run_simulation(){
     ifstream fin;
     fin.open(filename.c_str(), ifstream::in);
     string direccion, SoL;
-    std::vector<std::pair<unsigned int, float> > xy_pts_A;
+    std::vector<std::pair<double, double> > xy_pts_A;//vetores para graficar resultados
     std::vector<std::pair<double, double> > xy_pts_B;
-    std::vector<std::pair<double, double> > xy_pts_C;
     clock_t inicio = clock();
     double hitrate;
-    float missrate;
+    double missrate;
     while(!fin.eof())
     {
         fin >> direccion >> SoL;
         sscanf(direccion.c_str(), "%x", &dir);//conversion de hex a decimal y se asigna a dir
                                               //con dir se obtiene el tag y el set dependiendo de
                                               //el offset, index calculados inicialmente
+        
         this->select_set = obtener_set(this->dir, this->n_sets, this->offset);
         //cout<<"set seleccionado es: "<<select_set<<endl;
         this->tag = obtener_tag(this->dir, this->indexMasoffset);
@@ -81,24 +81,31 @@ void Cache::run_simulation(){
                 accesos++;
             }
            }
-        hitrate=((float)hits/accesos)*100;
-        missrate=((float)miss/accesos)*100;
-        xy_pts_A.push_back(std::make_pair(accesos,missrate));//vectores para gnuplot
-        xy_pts_B.push_back(std::make_pair(accesos, hitrate));
-        //xy_pts_C.push_back(std::make_pair(miss, hits));
+        //hitrate=((double)hits/accesos)*100;
+        missrate=((double)miss/accesos)*100;
+        //grificamos unicamente las primeras 10000 instrucciones - evitamos el gnuplot cuelgue
+	if(accesos<=10000){
+        	xy_pts_A.push_back(std::make_pair(accesos,missrate));//actualizo vectores con datos adquiridos
+        	//xy_pts_B.push_back(std::make_pair(accesos, hitrate));
+        	gnp << "set xlabel 'Numero de instrucciones'\n";
+        	gnp << "set ylabel 'missrate (%)'\n";
+        	gnp << "set xrange [0:"<<accesos<<"]\nset yrange [0:100]\n"; //pasando comandos al gnuplot object
+        	gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'missrate'"<<std::endl;
+           	// << gnp.file1d(xy_pts_B) << "with lines title 'hitrate'"<<std::endl;
+        	cout<<"passing data to gnuplot==>>"<<missrate<<endl;
+	}
     }
     cout<<"numero total de hits: "<<hits<<endl;
     cout<<"numero total de misses: "<<miss<<endl;
     cout<<"numero total de accesos a cache fue de: "<<accesos<<endl;
-    cout<<"MISSRATE "<<missrate<<endl;
     clock_t final = clock();
     double tiempo_sim = (final - inicio)/ CLOCKS_PER_SEC;
-    cout<<"el tiempo  de simulación sin contar lo que tome gnuplot para graficar fue de: "<<tiempo_sim<<" segundos"<<endl;
-    gnp << "set xrange [0:"<<accesos<<"]\nset yrange [0:100]\n";            //pasando comandos al gnuplot object
-    gnp << "set xlabel 'Numero de instrucciones'\n";
-    gnp << "set ylabel 'misrate and hitrate (%)'\n";
-    gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'missrate',"
-            << gnp.file1d(xy_pts_B) << "with lines title 'hitrate'"<<std::endl;
+    //cout<<"el tiempo  de simulación sin contar lo que tome gnuplot para graficar fue de: "<<tiempo_sim<<" segundos"<<endl;
+    //gnp << "set xrange [0:"<<accesos<<"]\nset yrange [0:100]\n"; //pasando comandos al gnuplot object
+    //gnp << "set xlabel 'Numero de instrucciones'\n";
+    //gnp << "set ylabel 'misrate and hitrate (%)'\n";
+    //gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'missrate',"
+      //      << gnp.file1d(xy_pts_B) << "with lines title 'hitrate'"<<std::endl;
     delete(cache);//limpiado de memoria
 }
 
