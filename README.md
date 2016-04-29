@@ -35,7 +35,8 @@ el siguiente comando:
 una vez instalados puede compilar esta aplicación utilizando make. Una vez compilada la aplicación puede
 ejecutarla usando lo siguiente
 > ./cache 1024 32 2
--1024 es el primer argumento indica el tamaño de cache a emular
--32 es el segundo argumento, indica el tamaño del bloque en el cache
--2 tercer argumento , indica el tipo de asociatividad 1 para mapeo directo, 2 para 2-way y 4 para 4-way
+
+>1024 es el primer argumento indica el tamaño de cache a emular
+>32 es el segundo argumento, indica el tamaño del bloque en el cache
+>2 tercer argumento , indica el tipo de asociatividad 1 para mapeo directo, 2 para 2-way y 4 para 4-way
 
