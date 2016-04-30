@@ -22,7 +22,6 @@ class Cache
     public:
         Cache();
         ~Cache();
-        friend class grap;
         unsigned int t_cache;
         int t_bloque;
         int asoc;
@@ -53,9 +52,9 @@ class Cache
         unsigned int dir;
         int indexMasoffset; //numero de bits a correr para leer el tag
         unsigned int accesos;//control del numero de lineas y calcular el hitrate y misrate
-        inline unsigned int obtener_set(unsigned int &dir, int &n_sets, int &offset){
+        inline int obtener_set(unsigned int &dir, int &n_sets, int &offset){
             unsigned int data = (dir>>offset)%n_sets;
-            return data;
+            return data;//
        }
         inline unsigned int obtener_tag(unsigned int &dir, int &indexMasoffset){
             unsigned int data = dir>>indexMasoffset;
