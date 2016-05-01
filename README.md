@@ -21,17 +21,17 @@ Se utiliza GnuPlot, el cual ofrece la opción de ejecutar comandos a traves de u
 iostream, para ello tambien es necesario instalar los siguientes paquetes
 
 * gnuplot
-* libboost-dev
-* libboost-iostreams-dev
-* libboost-filesystem-dev
-* libboost-system-dev
+* libboost1.55-all-dev
+* libboost-iostreams1.55-dev
+* libboost-filesystem1.55-dev
+* libboost-system1.55-dev
 
 sin estos la compilación de esta aplicación NO sera posible
 
 si esta en un entorno `unix/debian-ubuntu` puede instalar los paquetes indicados utilizando
 el siguiente comando:
 
- > sudo apt-get install gnuplot libboost-dev libboost-system-dev libboost-filesystem-dev libboost-iostreams-dev
+>sudo apt-get install gnuplot libboost-iostreams1.55-dev libboost-filesystem1.55-dev libboost-system1.55-dev
 
 una vez instalados puede compilar esta aplicación utilizando make. Una vez compilada la aplicación puede
 ejecutarla usando lo siguiente

@@ -20,8 +20,6 @@ void Cache::configure(){
     printf("el offsets es: %d\n", offset);
     printf("numero de sets: %d\n", n_sets);
     printf("el index es: %d\n", index);
-    //dir = 20005489125478;
-
 
     //######### Ajuste dinámico de la matriz cache e inicializacióm ####################################
     cache = new int *[n_sets];
@@ -91,21 +89,13 @@ void Cache::run_simulation(){
         	gnp << "set ylabel 'missrate (%)'\n";
         	gnp << "set xrange [0:"<<accesos<<"]\nset yrange [0:100]\n"; //pasando comandos al gnuplot object
         	gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'missrate'"<<std::endl;
-           	// << gnp.file1d(xy_pts_B) << "with lines title 'hitrate'"<<std::endl;
+		//gnp.binFile1d(xy_pts_A,"record");// << "with lines title 'missrate'";
         	cout<<"passing data to gnuplot==>>"<<missrate<<endl;
 	}
     }
     cout<<"numero total de hits: "<<hits<<endl;
     cout<<"numero total de misses: "<<miss<<endl;
     cout<<"numero total de accesos a cache fue de: "<<accesos<<endl;
-    clock_t final = clock();
-    double tiempo_sim = (final - inicio)/ CLOCKS_PER_SEC;
-    //cout<<"el tiempo  de simulación sin contar lo que tome gnuplot para graficar fue de: "<<tiempo_sim<<" segundos"<<endl;
-    //gnp << "set xrange [0:"<<accesos<<"]\nset yrange [0:100]\n"; //pasando comandos al gnuplot object
-    //gnp << "set xlabel 'Numero de instrucciones'\n";
-    //gnp << "set ylabel 'misrate and hitrate (%)'\n";
-    //gnp << "plot" << gnp.file1d(xy_pts_A) << "with lines title 'missrate',"
-      //      << gnp.file1d(xy_pts_B) << "with lines title 'hitrate'"<<std::endl;
     delete(cache);//limpiado de memoria
 }
 
