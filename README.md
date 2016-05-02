@@ -26,7 +26,8 @@ iostream, para ello tambien es necesario instalar los siguientes paquetes
 * libboost-filesystem1.55-dev
 * libboost-system1.55-dev
 
-sin estos la compilación de esta aplicación NO sera posible
+si se tiene ubuntu 15.10 en adelante se sugiere estos mismos paquetes pero la version 1.58
+
 
 si esta en un entorno `unix/debian-ubuntu` puede instalar los paquetes indicados utilizando
 el siguiente comando:

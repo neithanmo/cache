@@ -12,8 +12,10 @@
 #include <vector>
 #include "gnuplot-iostream.h"
 /*
- * Esta es una pequeña tarea programada del curso Estructuras de computadoras digitales II
- * El objetivo es simular una memoria cache.
+ * Cache memory simulator
+ * by Natanael Mojica
+ * Alonso Rojas
+ *
  *  */
 
 using namespace std;
