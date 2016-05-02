@@ -62,7 +62,6 @@ void Cache::run_simulation(){
                                               //el offset, index calculados inicialmente
         
         this->select_set = obtener_set(this->dir, this->n_sets, this->offset);
-        //cout<<"set seleccionado es: "<<select_set<<endl;
         this->tag = obtener_tag(this->dir, this->indexMasoffset);
 
         //######################## Accesando al cache y comparando tags ##################################################

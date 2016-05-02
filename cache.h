@@ -27,8 +27,6 @@ class Cache
         unsigned int t_cache;
         int t_bloque;
         int asoc;
-        unsigned int get_tag();
-        unsigned int get_set();
         Gnuplot gnp;
         bool done;
         void configure();// funcion para calcular el offset, index, set,
